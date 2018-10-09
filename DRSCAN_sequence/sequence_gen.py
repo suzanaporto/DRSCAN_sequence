@@ -12,7 +12,7 @@ def gen_sequence(snp_name, info_list):
 		snp_al = i['allele_wt']
 		snp_al_v = i['allele_v']
 
-		args = {"snp_name":snp_name,"snp_location":snp_location,"snp_chrom":snp_chrom,"snp_al_wt":snp_al,"snp_al_v":snp_al_v,'return_list':True}
+		args = {"snp_name":snp_name,"snp_location":snp_location,"snp_chrom":snp_chrom,"snp_al_wt":snp_al,"snp_al_v":snp_al_v,"snp_charac":"SNV",'return_list':True}
 		
 		res.extend(m3.main(args))
 	
