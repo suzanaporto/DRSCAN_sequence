@@ -85,9 +85,9 @@ class SnpDAO (object):
       tamanho_seq = 50*2 + 1
       seq_meio = r1.text
       seq_meio = seq_meio[:50] + snp.ancestral_al.nome + seq_meio[51:]
-      print (">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(51))
+      print (">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+str(51))
       print (seq_meio)
-      f = open("sequencias.fna","w")   #create add file in write mode
+      f = open("sequenciasalzheimer.fna","a")   #create add file in write mode
       f.write(">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(51) + '\n')
       f.write(seq_meio + '\n')  #writes o/p to add.txt file
       f.close()
@@ -95,7 +95,7 @@ class SnpDAO (object):
           seq_meio_alt = seq_meio[:50] + j.nome + seq_meio[51:]
           print (">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(51))
           print (seq_meio_alt)
-          f = open("sequencias.fna","w")   #create add file in write mode
+          f = open("sequenciasalzheimer.fna","a")   #create add file in write mode
           f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(51)+ '\n')
           f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
           f.close()
@@ -149,7 +149,7 @@ class SnpDAO (object):
               #string_nomes_snps = '|'.join(str(lista_comb))
               print (">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|"+string_dos_alelos+"|"+ str(lista_comb[l].location-50) +"-"+ str(lista_comb[l].location+50))
               print(request_text_middle)
-              f = open("sequencias.fna","w")   #create add file in write mode
+              f = open("sequenciasalzheimer.fna","a")   #create add file in write mode
               f.write(">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|"+string_dos_alelos+"|"+ str(lista_comb[l].location-50) +"-"+ str(lista_comb[l].location+50) + '\n')
               f.write(request_text_middle + '\n')  #writes o/p to add.txt file
               f.close()

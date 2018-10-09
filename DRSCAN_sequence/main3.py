@@ -312,6 +312,23 @@ def main(args):
 				del lista_por_chrom[:]
 	else:
 		snp_stuff.request_sequence(lista_snp[0])
+		
+	return txt_2_list(args['return_list'], filename = "sequenciasdef.txt")
+		
+				
+def txt_2_list(return_list, filename = "sequenciasdef.txt"):
+
+    if(return_list):
+	  f = open(filename,"r")
+	
+	  txt_to_list =[]
+	  for line in f: ### TODO: 
+		  txt_to_list.append()
+	  f.close
+	  return txt_to_list
+	   
+     else: 
+	   return False			
 	
 
 if __name__ == '__main__':
@@ -325,5 +342,6 @@ if __name__ == '__main__':
 	parser.add_argument('--snp_al_v', default='C', type=str)
 	parser.add_argument('--verify', default='n', type=str)
 	parser.add_argument('--delete_snp', default='n', type=str)
+	parser.add_argument('--return_list', default=False, type=bool)
 	args = vars(parser.parse_args())    
 	main(args)
