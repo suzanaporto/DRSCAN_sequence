@@ -327,8 +327,8 @@ def txt_2_list(return_list, filename = "sequenciasdef.txt"):
 	  f.close
 	  return txt_to_list
 	   
-     else: 
-	   return False			
+    else: 
+	  return False			
 	
 
 if __name__ == '__main__':
