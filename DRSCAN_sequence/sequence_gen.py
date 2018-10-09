@@ -21,6 +21,5 @@ def gen_sequence(snp_name, info_list):
 	print(res)
 		
 	#TODO res to dataframe
-	df = pd.read_csv(res, sep='\t')
-	return df;
+	return res
 	
