@@ -321,7 +321,7 @@ def txt_2_list(return_list, filename = "sequenciasdef.txt"):
     if(return_list):
 		f = open(filename,"r")
 		txt_to_list =[]
-		for line in f: ### TODO: 
+		for line in f:
 			txt_to_list.append()
 		f.close
 		return txt_to_list
