@@ -316,16 +316,16 @@ def main(args):
 	return txt_2_list(args['return_list'], filename = "sequenciasdef.fna")
 		
 def txt_2_list(return_list, filename = "sequenciasdef.fna"):
-	if(return_list):
-    		with open(filename,"r") as f:
-	  		f = open(filename,"r")
-	  		txt_to_list =[]
-	  		for line in f:
-		  		txt_to_list.append()
-	  	f.close
-	  	return txt_to_list
-  	else: 
-	  	return False
+  if(return_list):
+    with open(filename,"r") as f:
+      f = open(filename,"r")
+      txt_to_list =[]
+      for line in f:
+        txt_to_list.append()
+    f.close
+    return txt_to_list
+  else:
+    return False
 
 if __name__ == '__main__':
 
