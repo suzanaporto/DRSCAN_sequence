@@ -14,7 +14,7 @@ def gen_sequence(snp_name, info_list):
 
 		args = {"snp_name":snp_name,"snp_location":snp_location,"snp_chrom":snp_chrom,"snp_charac":"SNV","snp_al_wt":snp_al,"snp_al_v":snp_al_v,'return_list':True}
 		
-		print(args)
+		print(args['snp_name'])
 		
 		res.extend(m3.main(args))
 	
