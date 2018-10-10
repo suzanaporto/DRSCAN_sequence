@@ -18,8 +18,8 @@ def gen_sequence(snp_name, info_list):
 			"snp_charac":"SNV",
 			"snp_al_wt":snp_al,
 			"snp_al_v":snp_al_v,
-			"verify":'n',
-			"delete_snp":'n',
+			"verify":"n",
+			"delete_snp":"n",
 			'return_list':True}
 		
 		print(args['snp_name'])
