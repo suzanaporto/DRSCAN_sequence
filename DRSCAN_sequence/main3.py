@@ -58,9 +58,9 @@ def main(args):
 	#pedir para o usuario inserir uma snp(nome da snp)
 
 	snp_nome = args['snp_name']
-	snp_local = args['snp_location']
+	snp_local = int(args['snp_location'])
 	#alguns dos atributos para o alelo
-	snp_chrom = args['snp_chrom']
+	snp_chrom = int(args['snp_chrom'])
 	snp_charact = args['snp_charac']
 	snp_ancestral = args['snp_al_wt']
 	minor_allele = args['snp_al_v']
@@ -92,6 +92,8 @@ def main(args):
 	for j in i.minor_al:
 		print ("minor allele: " + j.nome)
 		print ("posição minor allele: " + str(j.snp_pos))
+	
+	
 
 	'''
 	allele1 = Allele(nome='T',local=17282721,cromossomo=19,is_comum=True,snp_pos=0)
@@ -316,16 +318,16 @@ def main(args):
 	return txt_2_list(args['return_list'], filename = "sequenciasdef.fna")
 		
 def txt_2_list(return_list, filename = "sequenciasdef.fna"):
-  if(return_list):
-    with open(filename,"r") as f:
-      f = open(filename,"r")
-      txt_to_list =[]
-      for line in f:
-        txt_to_list.append()
-    f.close
-    return txt_to_list
-  else:
-    return False
+	if (return_list):
+		with open(filename,"r") as f:
+			f = open(filename,"r")
+			txt_to_list =[]
+			for line in f:
+				txt_to_list.append(line)
+			f.close
+		return txt_to_list
+	else:
+		return False
 
 if __name__ == '__main__':
 
