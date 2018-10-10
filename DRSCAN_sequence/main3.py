@@ -56,12 +56,12 @@ def main(args):
 
 	#for i in range(numero_de_snps):
 	#pedir para o usuario inserir uma snp(nome da snp)
-	
-  	snp_nome = args['snp_name']
+
+	snp_nome = args['snp_name']
 	snp_local = args['snp_location']
 	#alguns dos atributos para o alelo
 	snp_chrom = args['snp_chrom']
-	snp_charact = args.get('snp_charac')
+	snp_charact = args['snp_charac']
 	snp_ancestral = args['snp_al_wt']
 	minor_allele = args['snp_al_v']
 	minor_allele.upper()
