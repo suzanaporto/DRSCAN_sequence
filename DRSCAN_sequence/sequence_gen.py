@@ -14,6 +14,8 @@ def gen_sequence(snp_name, info_list):
 		verf = "n"
 		del_s = "n"
 		type_s = "SNV"
+		
+		print("location ",snp_location)
 
 		args = {"snp_name":snp_name,
 			"snp_location":snp_location,
