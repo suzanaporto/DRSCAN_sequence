@@ -15,17 +15,7 @@ def gen_sequence(snp_name, info_list):
 		del_s = "n"
 		type_s = "SNV"
 
-		args = {
-      			"snp_name":snp_name,
-			"snp_location":snp_location,
-			"snp_chrom":snp_chrom,
-			"snp_al_wt":snp_al,
-			"snp_al_v":snp_v,
-			"snp_charac":type_s,
-			"verify":verf,
-			"delete_snp":del_s,
-			'return_list':True
-    		}
+		args = {"snp_name":snp_name,"snp_location":snp_location,"snp_chrom":snp_chrom,"snp_al_wt":snp_al,"snp_al_v":snp_v,"snp_charac":type_s,"verify":verf,"delete_snp":del_s,'return_list':True}
 		
 		print(args['snp_name'])
 		
