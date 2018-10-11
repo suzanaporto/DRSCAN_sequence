@@ -82,17 +82,6 @@ def main(args):
 
 	#deleta tudo da lista de minor alleles
 	minor_allele_list = []
-
-	for i in lista_snp:
-		print ("nome: " + i.name)
-		print ("local: " + str(i.location))
-		print ("cromossomo: " + str(i.chrom))
-		print ("alelo ancestral: " + str(i.ancestral_al.nome))
-		print ("alelo ancestral posição: " + str(i.ancestral_al.snp_pos))
-	for j in i.minor_al:
-		print ("minor allele: " + j.nome)
-		print ("posição minor allele: " + str(j.snp_pos))
-	
 	
 
 	'''
@@ -177,15 +166,6 @@ def main(args):
 				if snp.name == nome_da_snp:
 					lista_snp.remove(snp)
 
-	for i in lista_snp:
-		print ("nome: " + i.name)
-		print ("local" + str(i.location))
-		print (i.chrom)
-		print (i.ancestral_al.nome)
-		print (i.ancestral_al.snp_pos)
-		for j in i.minor_al:
-			print (j.nome)
-			print (j.snp_pos)
 
 	#--------------------------------sort na lista/ por cromossomo e por local--------------------------------------------///
 
