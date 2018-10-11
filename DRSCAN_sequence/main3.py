@@ -233,7 +233,6 @@ def main(args):
 				print (str(len(lista_por_chrom)))
 				#verifica se a lista de cromossomo for maior do que 1
 				if len(lista_por_chrom) > 1:
-					print ("Entrou aqui")
 					#faz uma iteração na lista de cromossomos até o penúltimo
 					for i in range(len(lista_por_chrom)-1):
                     
