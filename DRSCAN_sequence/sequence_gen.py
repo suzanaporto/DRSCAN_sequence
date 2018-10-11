@@ -29,7 +29,7 @@ def gen_sequence(snp_name, info_list):
 		
 		print(args['snp_name'])
 		
-		res.append(m3.main(args))
+		res.extend(m3.main(args))
 	
 	print(res)
 		
