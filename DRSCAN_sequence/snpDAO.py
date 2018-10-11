@@ -90,15 +90,13 @@ class SnpDAO (object):
       f = open("sequenciasdef.fna","w")   #create add file in write mode
       f.write(">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(51) + '\n')
       f.write(seq_meio + '\n')  #writes o/p to add.txt file
-      f.close()
       for j in snp.minor_al:
           seq_meio_alt = seq_meio[:50] + j.nome + seq_meio[51:]
           print (">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(51))
           print (seq_meio_alt)
-          f = open("sequenciasdef.fna","w")   #create add file in write mode
           f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(51)+ '\n')
           f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
-          f.close()
+      f.close()
 
     def request_sequence_combinations(self,lista_comb,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1,):
       g = GraphDAO()
