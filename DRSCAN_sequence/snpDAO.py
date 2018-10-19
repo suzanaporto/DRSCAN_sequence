@@ -14,14 +14,14 @@ from graphDAO import GraphDAO
 class SnpDAO (object):
 
     #request para sequencia com a snp np meio/retorna a string
-    def request_sequence_middle(self, start_location,end_location, snp_chrom):
+    def request_sequence_middle(self, start_location,end_location, snp_chrom,genome_version):
         #declara o servidor
         server = "http://rest.ensembl.org"
 
         #declara as variáveis para montar as urls para fazer o request
         x = start_location - 50
         y = end_location + 50
-        ext = "/sequence/region/human/" + str(snp_chrom) +":"+ str(x) + ".."+ str(y) + ":1?"
+        ext = "/sequence/region/human/" + str(snp_chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version
 
         r1 = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
 
@@ -57,7 +57,7 @@ class SnpDAO (object):
         right_left_size = int(list_size/2)
         x = tail_location - list_size
         y = middle_location + list_size
-        ext = "/sequence/region/human/" + str(snp_chrom) +":"+ str(x) + ".."+ str(y) + ":1?"
+        ext = "/sequence/region/human/" + str(snp_chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version"
 
         r1 = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
 
@@ -65,40 +65,46 @@ class SnpDAO (object):
           r1.raise_for_status()
           sys.exit()
 
-        return r1.text
+        return r1.text      
 
-    def request_sequence(self,snp):
+    def request_sequence(self,snp,filename="sequenciasdef.txt",genome_version):
       #declara o servidor
       server = "http://rest.ensembl.org"
 
       x = snp.location - 50
       y = snp.location + 50
-      ext = "/sequence/region/human/" + str(snp.chrom) +":"+ str(x) + ".."+ str(y) + ":1?"
-
+      ext = "/sequence/region/human/" + str(snp.chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version
+  
       r1 = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
-
+  
       if not r1.ok:
         r1.raise_for_status()
         sys.exit()
-
+  
       # Coloca as sequencias de snp no meio na variavel declarada
       tamanho_seq = 50*2 + 1
       seq_meio = r1.text
-      seq_meio = seq_meio[:50] + snp.ancestral_al.nome + seq_meio[51:]
-      print (">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+str(51))
+      seq_meio = seq_meio[:50] + snp.ancestral_al.nome + seq_meio[51:] 
+      print (">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(x)+"-"+str(y))
       print (seq_meio)
-      f = open("sequenciasalzheimer.fna","a")   #create add file in write mode
-      f.write(">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(51) + '\n')
+	  
+      f = open(filename,"a")   #create add file in write mode
+	  line_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(x)+"-"+str(y) + '\n'
+      f.write(line_seq)
       f.write(seq_meio + '\n')  #writes o/p to add.txt file
       f.close()
       for j in snp.minor_al:
           seq_meio_alt = seq_meio[:50] + j.nome + seq_meio[51:]
-          print (">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(51))
+          print (">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(x)+"-"+str(y))
           print (seq_meio_alt)
-          f = open("sequenciasalzheimer.fna","a")   #create add file in write mode
-          f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(51)+ '\n')
+          f = open(filename,"a")   #create add file in write mode
+          f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(x)+"-"+str(y)+ '\n')
           f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
           f.close()
+		 
+	
+		
+
 
     def request_sequence_combinations(self,lista_comb,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1,):
       g = GraphDAO()
@@ -122,14 +128,14 @@ class SnpDAO (object):
 
       #criar grafo com a lista de alelos devidamente preenchida/por algum motivo ele precisou do numero da ultima posicao
       grafo = g.create_graph(lista_de_alelos,ultima_pos_da_snp)
-
+  
       #fazer as combinacoes
       for k in first_alleles:
           for f in last_alleles:
               lista_de_comb_sets.append(g.find_all_paths(grafo,start=k,end=f))
-
+  
       #fazer as sequencias
-
+      
       first_location_snp = lista_comb[0].location
       first_location_chrom = lista_comb[0].chrom
       last_location_snp = lista_comb[-1].location
@@ -149,10 +155,10 @@ class SnpDAO (object):
               #string_nomes_snps = '|'.join(str(lista_comb))
               print (">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|"+string_dos_alelos+"|"+ str(lista_comb[l].location-50) +"-"+ str(lista_comb[l].location+50))
               print(request_text_middle)
-              f = open("sequenciasalzheimer.fna","a")   #create add file in write mode
+              f = open("sequenciasdef.txt","a")   #create add file in write mode
               f.write(">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|"+string_dos_alelos+"|"+ str(lista_comb[l].location-50) +"-"+ str(lista_comb[l].location+50) + '\n')
               f.write(request_text_middle + '\n')  #writes o/p to add.txt file
-              f.close()
+              f.close()	
               #colocas só as sequencias nessa lista
               #lista_de_sequencias.append(request_text_middle)
               #criar objetos para colocá-los numa lista de sequencias
