@@ -341,6 +341,6 @@ if __name__ == '__main__':
 	parser.add_argument('--verify', default='n', type=str)
 	parser.add_argument('--delete_snp', default='n', type=str)
 	parser.add_argument('--return_list', default=False, type=bool)
-	parser.add_argument('--genome_version', default=GRCh37, type=str)
+	parser.add_argument('--genome_version', default='GRCh37', type=str)
 	args = vars(parser.parse_args())    
 	main(args)
