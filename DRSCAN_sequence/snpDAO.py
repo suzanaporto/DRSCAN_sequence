@@ -57,7 +57,7 @@ class SnpDAO (object):
         right_left_size = int(list_size/2)
         x = tail_location - list_size
         y = middle_location + list_size
-        ext = "/sequence/region/human/" + str(snp_chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version"
+        ext = "/sequence/region/human/" + str(snp_chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version
 
         r1 = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
 
