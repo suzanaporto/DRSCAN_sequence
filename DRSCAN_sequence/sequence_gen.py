@@ -34,6 +34,7 @@ def gen_sequence(snp_name, info_list,genome_version):
 				"snp_charac":"SNV",
 				'return_list':True,
 				"verify":'n',
+				"delete_snp":'n',
 				"genome_version":genome_version}
 		
 		res.extend(m3.main(args))
