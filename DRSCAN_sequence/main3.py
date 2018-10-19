@@ -56,14 +56,14 @@ def main(args):
 
 	#for i in range(numero_de_snps):
 	#pedir para o usuario inserir uma snp(nome da snp)
-
 	snp_nome = args['snp_name']
-	snp_local = int(args['snp_location'])
+	snp_local = args['snp_location']
 	#alguns dos atributos para o alelo
-	snp_chrom = int(args['snp_chrom'])
+	snp_chrom = args['snp_chrom']
 	snp_charact = args['snp_charac']
-	snp_ancestral = args['snp_al_wt']
-	minor_allele = args['snp_al_v']
+	snp_ancestral =  args['snp_al_wt']
+	minor_allele =  args['snp_al_v']
+	genome_version = args['genome_version']
 	minor_allele.upper()
 
 	allele_comum_insert = Allele(nome=snp_ancestral,local=snp_local,cromossomo=snp_chrom,is_comum=True,snp_pos=0)
@@ -82,7 +82,16 @@ def main(args):
 
 	#deleta tudo da lista de minor alleles
 	minor_allele_list = []
-	
+
+	for i in lista_snp:
+		print ("nome: " + i.name)
+		print ("local: " + str(i.location))
+		print ("cromossomo: " + str(i.chrom))
+		print ("alelo ancestral: " + str(i.ancestral_al.nome))
+		print ("alelo ancestral posição: " + str(i.ancestral_al.snp_pos))
+	for j in i.minor_al:
+		print ("minor allele: " + j.nome)
+		print ("posição minor allele: " + str(j.snp_pos))
 
 	'''
 	allele1 = Allele(nome='T',local=17282721,cromossomo=19,is_comum=True,snp_pos=0)
@@ -166,6 +175,15 @@ def main(args):
 				if snp.name == nome_da_snp:
 					lista_snp.remove(snp)
 
+	for i in lista_snp:
+		print ("nome: " + i.name)
+		print ("local" + str(i.location))
+		print (i.chrom)
+		print (i.ancestral_al.nome)
+		print (i.ancestral_al.snp_pos)
+		for j in i.minor_al:
+			print (j.nome)
+			print (j.snp_pos)
 
 	#--------------------------------sort na lista/ por cromossomo e por local--------------------------------------------///
 
@@ -233,6 +251,7 @@ def main(args):
 				print (str(len(lista_por_chrom)))
 				#verifica se a lista de cromossomo for maior do que 1
 				if len(lista_por_chrom) > 1:
+					print ("Entrou aqui")
 					#faz uma iteração na lista de cromossomos até o penúltimo
 					for i in range(len(lista_por_chrom)-1):
                     
@@ -240,13 +259,13 @@ def main(args):
 						if (i==0 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50) or (i!=0 and lista_por_chrom[i].location - lista_por_chrom[i-1].location >=50 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50):
                         
 							#faz a sequência com uma snp só
-							snp_stuff.request_sequence(lista_por_chrom[i])
+							snp_stuff.request_sequence(lista_por_chrom[i],genome_version)
                         
 							#se a próxima iteração for a última(penultima snp) e o próximo menos o atual for maior do que 50
 							if i+1 == len(lista_por_chrom)-1 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50:
                             
 								#faz a sequência da última snp da lista de cromossomos
-								snp_stuff.request_sequence(lista_por_chrom[i+1])
+								snp_stuff.request_sequence(lista_por_chrom[i+1],genome_version)
                     
 						#se tiver as condições do if
 						else:
@@ -280,33 +299,35 @@ def main(args):
 									if i+1==len(lista_por_chrom)-1 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50:
 
 										#faz a sequencia normal com o ultimo
-										snp_stuff.request_sequence(lista_por_chrom[i+1])
+										snp_stuff.request_sequence(lista_por_chrom[i+1],genome_version)
 				#lista de cromossomos é maior do que 1
 				else:
 
 					# faz a sequencia normal com a única snp da lista
-					snp_stuff.request_sequence(lista_por_chrom[0])
+					snp_stuff.request_sequence(lista_por_chrom[0],genome_version)
 					#() se o proximo for o ultimo da lista de snps, faça a sequencia normal do último(no caso de tiver só dois na lista)
 					if cont_i + 1 == tamanho_lista_snp:
-						snp_stuff.request_sequence(lista_snp[-1])  
+						snp_stuff.request_sequence(lista_snp[-1],genome_version)  
 				#deletar a lista das snps por cromossomo 
 				del lista_por_chrom[:]
 	else:
-		snp_stuff.request_sequence(lista_snp[0])
+		snp_stuff.request_sequence(lista_snp[0],genome_version)
 		
-	return txt_2_list(args['return_list'], filename = "sequenciasdef.fna")
+	return txt_2_list(args['return_list'], filename = "sequenciasdef.txt")
 		
-def txt_2_list(return_list, filename = "sequenciasdef.fna"):
-	if (return_list):
-		with open(filename,"r") as f:
-			f = open(filename,"r")
-			txt_to_list =[]
-			for line in f:
-				txt_to_list.append(line)
-			f.close
-		return txt_to_list
-	else:
-		return False
+				
+def txt_2_list(return_list, filename = "sequenciasdef.txt"):
+
+    if(return_list):
+	  f = open(filename,"r")
+	  txt_to_list =[]
+	  for line in f:
+		txt_to_list.append()
+	  f.close
+	  return txt_to_list
+    else: 
+	  return False			
+	
 
 if __name__ == '__main__':
 
@@ -320,5 +341,6 @@ if __name__ == '__main__':
 	parser.add_argument('--verify', default='n', type=str)
 	parser.add_argument('--delete_snp', default='n', type=str)
 	parser.add_argument('--return_list', default=False, type=bool)
+	parser.add_argument('--genome_version', default=GRCh37, type=str)
 	args = vars(parser.parse_args())    
 	main(args)
