@@ -89,7 +89,7 @@ class SnpDAO (object):
       print (seq_meio)
 	  
       f = open(filename,"a")   #create add file in write mode
-	  line_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(x)+"-"+str(y) + '\n'
+      line_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(x)+"-"+str(y) + '\n'
       f.write(line_seq)
       f.write(seq_meio + '\n')  #writes o/p to add.txt file
       f.close()
