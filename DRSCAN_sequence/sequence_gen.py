@@ -32,7 +32,7 @@ def gen_sequence(snp_name, info_list,genome_version):
 				"snp_al_wt":snp_al,
 				"snp_al_v":snp_al_v,
 				'return_list':True,
-				"genome_version": genome_version}
+				"genome_version":genome_version}
 		
 		res.extend(m3.main(args))
 	
