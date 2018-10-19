@@ -92,15 +92,13 @@ class SnpDAO (object):
       line_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(x)+"-"+str(y) + '\n'
       f.write(line_seq)
       f.write(seq_meio + '\n')  #writes o/p to add.txt file
-      f.close()
       for j in snp.minor_al:
           seq_meio_alt = seq_meio[:50] + j.nome + seq_meio[51:]
           print (">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(x)+"-"+str(y))
           print (seq_meio_alt)
-          f = open(filename,"w")   #create add file in write mode
           f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(x)+"-"+str(y)+ '\n')
           f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
-          f.close()
+      f.close()
 		 
 	
 		
