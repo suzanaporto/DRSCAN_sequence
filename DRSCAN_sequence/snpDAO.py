@@ -82,6 +82,7 @@ class SnpDAO (object):
         sys.exit()
   
       # Coloca as sequencias de snp no meio na variavel declarada
+      starting_at_one = 1
       tamanho_seq = 50*2 + 1
       seq_meio = r1.text
       seq_meio = seq_meio[:50] + snp.ancestral_al.nome + seq_meio[51:] 
