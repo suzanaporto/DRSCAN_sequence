@@ -85,18 +85,18 @@ class SnpDAO (object):
       tamanho_seq = 50*2 + 1
       seq_meio = r1.text
       seq_meio = seq_meio[:50] + snp.ancestral_al.nome + seq_meio[51:] 
-      print (">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(x)+"-"+str(y))
+      print (">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one))
       print (seq_meio)
 	  
       f = open(filename,"w")   #create add file in write mode
-      line_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str(x)+"-"+str(y) + '\n'
+      line_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one) + '\n'
       f.write(line_seq)
       f.write(seq_meio + '\n')  #writes o/p to add.txt file
       for j in snp.minor_al:
           seq_meio_alt = seq_meio[:50] + j.nome + seq_meio[51:]
-          print (">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(x)+"-"+str(y))
+          print (">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one))
           print (seq_meio_alt)
-          f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str(x)+"-"+str(y)+ '\n')
+          f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one)+ '\n')
           f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
       f.close()
 		 
