@@ -288,14 +288,14 @@ def main(args):
 def txt_2_list(return_list, filename = "sequenciasdef.txt"):
 
     if(return_list):
-	  with open(filename,"r") as f:
-	  	txt_to_list =[]
-	  	for line in f:
+	with open(filename,"r") as f:
+		txt_to_list =[]
+		for line in f:
 			txt_to_list.append(line)
-	  f.close
-	  return txt_to_list
-    else: 
-	  return False			
+	f.close
+	return txt_to_list
+    else:
+	return False			
 	
 
 if __name__ == '__main__':
