@@ -100,14 +100,11 @@ class SnpDAO (object):
           f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one)+ '\n')
           f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
       f.close()
-		 
-	
-		
 
 
-    def request_sequence_combinations(self,lista_comb,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1,):
+    def request_sequence_combinations(self,lista_comb,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1):
       g = GraphDAO()
-
+      pos_relativa_lista = []
       #ver as snps da lista de combinacoes e coloca os seus alelos na lista de alelos com numeros para representar as suas posicoes e snps
       for j in lista_comb:
         j.ancestral_al.snp_pos = cont
@@ -141,23 +138,30 @@ class SnpDAO (object):
       last_location_chrom = lista_comb[-1].location
       #sequencia buscada do ensembl.org
       request_text_middle = self.request_sequence_middle(first_location_snp,last_location_snp,first_location_chrom)
-      for k in lista_de_comb_sets:
-          for j in k:
+      for combinacao in lista_de_comb_sets:
+          for j in combinacao:
+              #quantidade de elementos
               for l in range(len(j)):
                   if (l == 0):
-                      real_index = 50
+                      #index do primeiro elemento
+                      real_index = 50 
                   else:
+                      #calculo do index real
                       real_index = real_index + lista_comb[l].location - lista_comb[l-1].location
+                  print("É pra ser o index real da snp2: " + str(real_index+1))
+                  pos_relativa_lista.append(str(real_index+1))
                   request_text_middle = request_text_middle[:real_index] + j[l] + request_text_middle[real_index+1:]
               string_dos_alelos = '|'.join(j)
               string_nomes_snps = '|'.join(map(str, lista_comb))
+              pos_relativa_lista = '|'.join(pos_relativa_lista)
               #string_nomes_snps = '|'.join(str(lista_comb))
-              print (">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|"+string_dos_alelos+"|"+ str(lista_comb[l].location-50) +"-"+ str(lista_comb[l].location+50))
+              print (">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa_lista)
               print(request_text_middle)
-              f = open("sequenciasdef.txt","w")   #create add file in write mode
-              f.write(">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|"+string_dos_alelos+"|"+ str(lista_comb[l].location-50) +"-"+ str(lista_comb[l].location+50) + '\n')
+              f = open("sequenciasdef.fna","a")   #create add file in write mode
+              f.write(">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa_lista + '\n')
               f.write(request_text_middle + '\n')  #writes o/p to add.txt file
               f.close()	
+              pos_relativa_lista = []
               #colocas só as sequencias nessa lista
               #lista_de_sequencias.append(request_text_middle)
               #criar objetos para colocá-los numa lista de sequencias
