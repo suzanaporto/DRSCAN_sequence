@@ -67,7 +67,7 @@ class SnpDAO (object):
 
         return r1.text      
 
-    def request_sequence(self,snp,genome_version,filename="sequenciasdef.txt"):
+    def request_sequence(self,snp,genome_version,filename="sequenciasdef.fna"):
       #declara o servidor
       server = "http://rest.ensembl.org"
 
