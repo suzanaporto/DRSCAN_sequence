@@ -282,10 +282,10 @@ def main(args):
 	else:
 		snp_stuff.request_sequence(lista_snp[0],genome_version)
 		
-	return txt_2_list(args['return_list'], filename = "sequenciasdef.txt")
+	return txt_2_list(args['return_list'], filename = "sequenciasdef.fna")
 		
 				
-def txt_2_list(return_list, filename = "sequenciasdef.txt"):
+def txt_2_list(return_list, filename = "sequenciasdef.fna"):
   if(return_list):
     with open(filename,"r") as f:
       txt_to_list =[]
