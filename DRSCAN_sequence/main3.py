@@ -57,8 +57,8 @@ def main(args):
 	#for i in range(numero_de_snps):
 	genome_version = args['genome_version']
 	minor_allele.upper()
-
-    	lista_snp = args['snp_list']
+	
+	lista_snp = args['snp_list']
 
 	'''
 	allele1 = Allele(nome='T',local=17282721,cromossomo=19,is_comum=True,snp_pos=0)
