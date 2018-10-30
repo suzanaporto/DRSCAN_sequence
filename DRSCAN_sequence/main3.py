@@ -176,7 +176,7 @@ def main(args):
 									lista_comb.append(lista_por_chrom[i+1])
 									#faz lista de combinações
 									#print (lista_comb)
-									snp_stuff.request_sequence_combinations(lista_comb)
+									snp_stuff.request_sequence_combinations(lista_comb,genome_version)
 									#deleta a lista de combinações
 									del lista_comb[:]
 							# se não atender ao respectivo if
@@ -188,7 +188,7 @@ def main(args):
 									lista_comb.append(lista_por_chrom[i])
 									#faz lista comb
 									#print (lista_comb)
-									snp_stuff.request_sequence_combinations(lista_comb)
+									snp_stuff.request_sequence_combinations(lista_comb,genome_version)
 
 									#se o proximo for a ultima iteração e a diferença entre atual e ultimo for maior do que 50
 									if i+1==len(lista_por_chrom)-1 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50:
