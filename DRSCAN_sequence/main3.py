@@ -56,7 +56,6 @@ def main(args):
 
 	#for i in range(numero_de_snps):
 	genome_version = args['genome_version']
-	minor_allele.upper()
 	
 	lista_snp = args['snp_list']
 
