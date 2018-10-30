@@ -102,7 +102,7 @@ class SnpDAO (object):
       f.close()
 
 
-    def request_sequence_combinations(self,lista_comb,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1):
+    def request_sequence_combinations(self,lista_comb,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],genome,cont=1):
       g = GraphDAO()
       pos_relativa_lista = []
       #ver as snps da lista de combinacoes e coloca os seus alelos na lista de alelos com numeros para representar as suas posicoes e snps
@@ -137,7 +137,7 @@ class SnpDAO (object):
       last_location_snp = lista_comb[-1].location
       last_location_chrom = lista_comb[-1].location
       #sequencia buscada do ensembl.org
-      request_text_middle = self.request_sequence_middle(first_location_snp,last_location_snp,first_location_chrom)
+      request_text_middle = self.request_sequence_middle(first_location_snp,last_location_snp,first_location_chrom,genome)
       for combinacao in lista_de_comb_sets:
           for j in combinacao:
               #quantidade de elementos
