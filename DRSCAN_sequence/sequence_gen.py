@@ -15,9 +15,8 @@ def gen_sequence(snp_names, info_list,genome_version):
 	#parser.add_argument('--genome_version', default=GRCh37, type=str)
 	#args = vars(parser.parse_args())
     
-    snp_list_object = []
-    minor_allele_list = []
-	
+    	snp_list_object = []
+    	minor_allele_list = []	
 	res = []
 	for i,snp_name in zip(info_list,snp_names):
 		
