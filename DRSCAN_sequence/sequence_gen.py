@@ -21,8 +21,8 @@ def gen_sequence(snp_names, info_list,genome_version):
 	
 	for i,snp_name in zip(info_list,snp_names):
 		
-		snp_location = i[index]['location']
-		snp_chrom = i[index]['chrom']
+		snp_location = int(i[index]['location'])
+		snp_chrom = int(i[index]['chrom'])
 		snp_al = i[index]['allele_wt']
 		snp_al_v = i[index]['allele_v']
 		
