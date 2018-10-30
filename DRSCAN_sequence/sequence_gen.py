@@ -20,6 +20,7 @@ def gen_sequence(snp_names, info_list,genome_version):
 	count = 0
 	
 	for i,snp_name in zip(info_list,snp_names):
+		print("suposto index: ",str(count))
 		snp_location = i[count]['location']
 		snp_chrom = i[count]['chrom']
 		snp_al = i[count]['allele_wt']
