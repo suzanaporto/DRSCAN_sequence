@@ -24,8 +24,8 @@ def gen_sequence(snp_names, info_list,genome_version):
 		snp_chrom = i['chrom']
 		snp_al = i['allele_wt']
 		snp_al_v = i['allele_v']
-        
-    		allele_comum_insert = Allele(nome=snp_al,local=snp_location,cromossomo=snp_chrom,is_comum=True,snp_pos=0)
+		
+		allele_comum_insert = Allele(nome=snp_al,local=snp_location,cromossomo=snp_chrom,is_comum=True,snp_pos=0)
     
     		for i in snp_al_v:
       			if i == 'A' or i == 'C' or i == 'G' or i == 'T':
