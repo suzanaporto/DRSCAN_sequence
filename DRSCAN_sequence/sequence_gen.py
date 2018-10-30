@@ -17,14 +17,14 @@ def gen_sequence(snp_names, info_list,genome_version):
 	minor_allele_list = []
 	res = []
 	
-	count = 0
+	index = 0
 	
 	for i,snp_name in zip(info_list,snp_names):
-		print("suposto index: ",str(count))
-		snp_location = i[count]['location']
-		snp_chrom = i[count]['chrom']
-		snp_al = i[count]['allele_wt']
-		snp_al_v = i[count]['allele_v']
+		
+		snp_location = i[index]['location']
+		snp_chrom = i[index]['chrom']
+		snp_al = i[index]['allele_wt']
+		snp_al_v = i[index]['allele_v']
 		
 		allele_comum_insert = Allele(nome=snp_al,local=snp_location,cromossomo=snp_chrom,is_comum=True,snp_pos=0)
 		
@@ -41,7 +41,6 @@ def gen_sequence(snp_names, info_list,genome_version):
 		#coloca a snp na lista de snps
 		snp_list_object.append(snp_insert)
 		
-		count+=1
 		
 	args = {"snp_list":snp_list_object,
 		"return_list":True,
