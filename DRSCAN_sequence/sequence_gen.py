@@ -19,7 +19,7 @@ def gen_sequence(snp_names, info_list,genome_version):
   	minor_allele_list = []	
   	res = []
   	for i,snp_name in zip(info_list,snp_names):
-		
+	
 		snp_location = i['location']
 		snp_chrom = i['chrom']
 		snp_al = i['allele_wt']
@@ -45,11 +45,9 @@ def gen_sequence(snp_names, info_list,genome_version):
           "verify":'n',
           "delete_snp":'n',
           "genome_version":genome_version}
-		
+		  
   res.append(m3.main(args))
-	
+  
   #print(res)
-		
-  #TODO res to dataframe
+  
   return res
-	
