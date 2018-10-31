@@ -70,7 +70,6 @@ class SnpDAO (object):
     def request_sequence(self,snp,genome_version,filename="sequenciasdef.fna"):
 	#declara o servidor
 	server = "http://rest.ensembl.org"
-	
 	x = snp.location - 50
 	y = snp.location + 50
 	ext = "/sequence/region/human/" + str(snp.chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version
