@@ -157,7 +157,6 @@ class SnpDAO (object):
             f.write(request_text_middle + '\n')  #writes o/p to add.txt file
             f.close()
 	pos_relativa_lista = []
-	#deletar as listas
 	real_index = 0
 	cont = 1
 	del first_alleles[:]
