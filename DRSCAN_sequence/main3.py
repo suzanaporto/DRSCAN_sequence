@@ -38,7 +38,7 @@ import argparse
 def main(args):
 
 	#cria uma lista vazia de snps
-	lista_snp = []
+	#lista_snp = []
 
 	#declara o servidor
 	server = "http://rest.ensembl.org"
