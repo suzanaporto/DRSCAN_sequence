@@ -150,19 +150,19 @@ class SnpDAO (object):
                 string_nomes_snps = '|'.join(map(str, lista_comb))
                 pos_relativa_lista = '|'.join(pos_relativa_lista)
                 #string_nomes_snps = '|'.join(str(lista_comb))
-		print (">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa_lista)
-		print(request_text_middle)
-		f = open("sequenciasdef.fna","w")   #create add file in write mode
-		f.write(">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa_lista + '\n')
-		f.write(request_text_middle + '\n')  #writes o/p to add.txt file
-		f.close()
-		pos_relativa_lista = []
+			print (">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa_lista)
+			print(request_text_middle)
+			f = open("sequenciasdef.fna","w")   #create add file in write mode
+			f.write(">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa_lista + '\n')
+			f.write(request_text_middle + '\n')  #writes o/p to add.txt file
+			f.close()
+			pos_relativa_lista = []
 		#colocas só as sequencias nessa lista
 		#lista_de_sequencias.append(request_text_middle)
 		#criar objetos para colocá-los numa lista de sequencias
 	    #deletar as listas
-	    real_index = 0
-	    cont = 1
+		real_index = 0
+		cont = 1
         del first_alleles[:]
         del last_alleles[:]
         del lista_comb[:]
