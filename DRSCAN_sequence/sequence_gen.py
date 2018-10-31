@@ -41,7 +41,10 @@ def gen_sequence(snp_names, info_list,genome_version):
 		#coloca a snp na lista de snps
 		snp_list_object.append(snp_insert)
 		
-		
+	for x in snp_list_object:
+		print(name)
+		print(location)
+	
 	args = {"snp_list":snp_list_object,
 		"return_list":True,
 		"verify":'n',
