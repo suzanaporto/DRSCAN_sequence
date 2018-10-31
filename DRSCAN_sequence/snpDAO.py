@@ -157,9 +157,9 @@ class SnpDAO (object):
 			f.write(request_text_middle + '\n')  #writes o/p to add.txt file
 			f.close()
 			pos_relativa_lista = []
-			#colocas só as sequencias nessa lista
-			#lista_de_sequencias.append(request_text_middle)
-			#criar objetos para colocá-los numa lista de sequencias
+		#colocas só as sequencias nessa lista
+		#lista_de_sequencias.append(request_text_middle)
+		#criar objetos para colocá-los numa lista de sequencias
 	    #deletar as listas
 	    real_index = 0
 	    cont = 1
