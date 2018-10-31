@@ -157,7 +157,7 @@ class SnpDAO (object):
               #string_nomes_snps = '|'.join(str(lista_comb))
               print (">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa_lista)
               print(request_text_middle)
-              f = open("sequenciasdef.fna","a")   #create add file in write mode
+              f = open("sequenciasdef.fna","w")   #create add file in write mode
               f.write(">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa_lista + '\n')
               f.write(request_text_middle + '\n')  #writes o/p to add.txt file
               f.close()	
