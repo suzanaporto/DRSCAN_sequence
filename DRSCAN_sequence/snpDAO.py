@@ -68,35 +68,34 @@ class SnpDAO (object):
         return r1.text      
 
     def request_sequence(self,snp,genome_version,filename="sequenciasdef.fna"):
-		#declara o servidor
-		server = "http://rest.ensembl.org"
-		x = snp.location - 50
-		y = snp.location + 50
-		ext = "/sequence/region/human/" + str(snp.chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version
-		r1 = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
-		
-		if not r1.ok:
-			r1.raise_for_status()
-			sys.exit()
+	#declara o servidor
+	server = "http://rest.ensembl.org"
+	x = snp.location - 50
+	y = snp.location + 50
+	ext = "/sequence/region/human/" + str(snp.chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version
+	r1 = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
+	if not r1.ok:
+		r1.raise_for_status()
+		sys.exit()
 		# Coloca as sequencias de snp no meio na variavel declarada
-		starting_at_one = 1
-		tamanho_seq = 50*2 + 1
-		seq_meio = r1.text
-		seq_meio = seq_meio[:50] + snp.ancestral_al.nome + seq_meio[51:]
-		print (">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one))
-		print (seq_meio)
-		
-		f = open(filename,"w")   #create add file in write mode
-		line_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one) + '\n'
-		f.write(line_seq)
-		f.write(seq_meio + '\n')  #writes o/p to add.txt file
-		for j in snp.minor_al:
-			seq_meio_alt = seq_meio[:50] + j.nome + seq_meio[51:]
-			print (">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one))
-			print (seq_meio_alt)
-			f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one)+ '\n')
-			f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
-			f.close()
+	starting_at_one = 1
+	tamanho_seq = 50*2 + 1
+	seq_meio = r1.text
+	seq_meio = seq_meio[:50] + snp.ancestral_al.nome + seq_meio[51:]
+	print (">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one))
+	print (seq_meio)
+
+	f = open(filename,"w")   #create add file in write mode
+	ine_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one) + '\n'
+	f.write(line_seq)
+	f.write(seq_meio + '\n')  #writes o/p to add.txt file
+	for j in snp.minor_al:
+		seq_meio_alt = seq_meio[:50] + j.nome + seq_meio[51:]
+		print (">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one))
+		print (seq_meio_alt)
+		f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one)+ '\n')
+		f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
+		f.close()
 
 
     def request_sequence_combinations(self,lista_comb,genome,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1):
