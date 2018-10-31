@@ -152,7 +152,9 @@ class SnpDAO (object):
                   pos_relativa_lista.append(str(real_index+1))
                   request_text_middle = request_text_middle[:real_index] + j[l] + request_text_middle[real_index+1:]
               string_dos_alelos = '|'.join(j)
+	      print("String dos alelos: " + string_dos_alelos)
               string_nomes_snps = '|'.join(map(str, lista_comb))
+	      print("nome das snps: " + string_nomes_snps)
               pos_relativa_lista = '|'.join(pos_relativa_lista)
               #string_nomes_snps = '|'.join(str(lista_comb))
               print (">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa_lista)
