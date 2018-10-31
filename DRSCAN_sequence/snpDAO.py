@@ -156,11 +156,11 @@ class SnpDAO (object):
             f.write(">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa_lista + '\n')
             f.write(request_text_middle + '\n')  #writes o/p to add.txt file
             f.close()
-	pos_relativa_lista = []
-	real_index = 0
-	cont = 1
-	del first_alleles[:]
-	del last_alleles[:]
-	del lista_comb[:]
-	del lista_de_alelos[:]
-	del lista_de_comb_sets[:]
+	    pos_relativa_lista = []
+	    real_index = 0
+	    cont = 1
+	    del first_alleles[:]
+	    del last_alleles[:]
+	    del lista_comb[:]
+	    del lista_de_alelos[:]
+	    del lista_de_comb_sets[:]
