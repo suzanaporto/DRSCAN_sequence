@@ -160,8 +160,8 @@ class SnpDAO (object):
 	#deletar as listas
 	real_index = 0
 	cont = 1
-        del first_alleles[:]
-        del last_alleles[:]
-        del lista_comb[:]
-        del lista_de_alelos[:]
-        del lista_de_comb_sets[:]
+	del first_alleles[:]
+	del last_alleles[:]
+	del lista_comb[:]
+	del lista_de_alelos[:]
+	del lista_de_comb_sets[:]
