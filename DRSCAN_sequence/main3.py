@@ -171,7 +171,7 @@ def main(args):
                                                         first_write = snp_stuff.request_sequence(lista_por_chrom[i],genome_version,first_write)
                         
 							#se a próxima iteração for a última(penultima snp) e o próximo menos o atual for maior do que 50
-							if i+1 == len(lista_por_chrom)-1 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50:
+                                                        if i+1 == len(lista_por_chrom)-1 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50:
                             
 								#faz a sequência da última snp da lista de cromossomos
 				                                print("Debug5")
