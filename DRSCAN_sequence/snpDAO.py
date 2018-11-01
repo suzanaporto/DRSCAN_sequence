@@ -98,7 +98,7 @@ class SnpDAO (object):
             f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one)+ '\n')
             f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
         f.close()
-	return False
+return False
 
     def request_sequence_combinations(self,lista_comb,genome,is_first,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1):
         g = GraphDAO()
