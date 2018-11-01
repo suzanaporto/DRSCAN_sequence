@@ -67,7 +67,7 @@ class SnpDAO (object):
 
         return r1.text      
 
-    def request_sequence(self,snp,genome_version,filename="sequenciasdef.fna"):
+    def request_sequence(self,snp,genome_version,is_first,filename="sequenciasdef.fna"):
         #declara o servidor
         server = "http://rest.ensembl.org"
         x = snp.location - 50
@@ -84,8 +84,10 @@ class SnpDAO (object):
         seq_meio = seq_meio[:50] + snp.ancestral_al.nome + seq_meio[51:]
         print (">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one))
         print (seq_meio)
-        
-        f = open(filename,"w")   #create add file in write mode
+        if is_first:
+            f = open(filename,"w")   #create add file in write mode
+        else:
+            f = open(filename,"a")
         line_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one) + '\n'
         f.write(line_seq)
         f.write(seq_meio + '\n')  #writes o/p to add.txt file
@@ -96,8 +98,9 @@ class SnpDAO (object):
             f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one)+ '\n')
             f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
         f.close()
+	return False
 
-    def request_sequence_combinations(self,lista_comb,genome,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1):
+    def request_sequence_combinations(self,lista_comb,genome,is_first,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1):
         g = GraphDAO()
         pos_relativa_lista = []
         #ver as snps da lista de combinacoes e coloca os seus alelos na lista de alelos com numeros para representar as suas posicoes e snps
@@ -153,7 +156,10 @@ class SnpDAO (object):
                 #string_nomes_snps = '|'.join(str(lista_comb))
                 print (">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa)
                 print(request_text_middle)
-                f = open("sequenciasdef.fna","w")   #create add file in write mode
+                if is_first:
+		    f = open(filename,"w")   #create add file in write mode
+		else:
+                    f = open(filename,"a")
                 f.write(">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa + '\n')
                 f.write(request_text_middle + '\n')  #writes o/p to add.txt file
                 f.close()
@@ -165,3 +171,4 @@ class SnpDAO (object):
         del lista_comb[:]
         del lista_de_alelos[:]
         del lista_de_comb_sets[:]
+	return False
