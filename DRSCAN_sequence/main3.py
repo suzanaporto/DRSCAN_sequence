@@ -76,6 +76,8 @@ def main(args):
 		print("nome: ",i.name)
 		print("location: ",i.location)
 		print("chromossome: ",i.chrom)
+		print("wild_type",i.ancestral_al)
+		print("minor allele",i.minor_al)
 
 	# Perguntar se o usuário gostaria de saber se as snps estão em um elemento regulatório baseado no roadmap epigenomics
 
