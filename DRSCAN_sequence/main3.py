@@ -141,7 +141,8 @@ def main(args):
 	cont = 1
 	#tamanho da lista de snps
 	tamanho_lista_snp = len(lista_snp) - 1
-
+	
+	first_write = True
 	#--------------------------------------------------------fazendo sequencias direto na verificacao---------------------------------------///
 
 	#faz um loop na lista toda
@@ -166,13 +167,13 @@ def main(args):
 						if (i==0 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50) or (i!=0 and lista_por_chrom[i].location - lista_por_chrom[i-1].location >=50 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50):
                         
 							#faz a sequência com uma snp só
-							snp_stuff.request_sequence(lista_por_chrom[i],genome_version)
+							first_write = snp_stuff.request_sequence(lista_por_chrom[i],genome_version,first_write)
                         
 							#se a próxima iteração for a última(penultima snp) e o próximo menos o atual for maior do que 50
 							if i+1 == len(lista_por_chrom)-1 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50:
                             
 								#faz a sequência da última snp da lista de cromossomos
-								snp_stuff.request_sequence(lista_por_chrom[i+1],genome_version)
+								first_write = snp_stuff.request_sequence(lista_por_chrom[i+1],genome_version,first_write)
                     
 						#se tiver as condições do if
 						else:
@@ -188,7 +189,7 @@ def main(args):
 									lista_comb.append(lista_por_chrom[i+1])
 									#faz lista de combinações
 									#print (lista_comb)
-									snp_stuff.request_sequence_combinations(lista_comb,genome_version)
+									first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
 									#deleta a lista de combinações
 									del lista_comb[:]
 							# se não atender ao respectivo if
@@ -200,25 +201,25 @@ def main(args):
 									lista_comb.append(lista_por_chrom[i])
 									#faz lista comb
 									#print (lista_comb)
-									snp_stuff.request_sequence_combinations(lista_comb,genome_version)
+									first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
 
 									#se o proximo for a ultima iteração e a diferença entre atual e ultimo for maior do que 50
 									if i+1==len(lista_por_chrom)-1 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50:
 
 										#faz a sequencia normal com o ultimo
-										snp_stuff.request_sequence(lista_por_chrom[i+1],genome_version)
+										first_write = snp_stuff.request_sequence(lista_por_chrom[i+1],genome_version,first_write)
 				#lista de cromossomos é maior do que 1
 				else:
 
 					# faz a sequencia normal com a única snp da lista
-					snp_stuff.request_sequence(lista_por_chrom[0],genome_version)
+					first_write =snp_stuff.request_sequence(lista_por_chrom[0],genome_version,first_write)
 					#() se o proximo for o ultimo da lista de snps, faça a sequencia normal do último(no caso de tiver só dois na lista)
 					if cont_i + 1 == tamanho_lista_snp:
-						snp_stuff.request_sequence(lista_snp[-1],genome_version)  
+						first_write =snp_stuff.request_sequence(lista_snp[-1],genome_version,first_write)  
 				#deletar a lista das snps por cromossomo 
 				del lista_por_chrom[:]
 	else:
-		snp_stuff.request_sequence(lista_snp[0],genome_version)
+		first_write =snp_stuff.request_sequence(lista_snp[0],genome_version,first_write)
 		
 	return txt_2_list(args['return_list'], filename = "sequenciasdef.fna")
 		
