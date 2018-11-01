@@ -143,9 +143,9 @@ class SnpDAO (object):
                     else:
                         #calculo do index real
                         real_index = real_index + lista_comb[l].location - lista_comb[l-1].location
-                        print("É pra ser o index real da snp2: " + str(real_index+1))
-                pos_relativa_lista.append(str(real_index+1))
-                request_text_middle = request_text_middle[:real_index] + j[l] + request_text_middle[real_index+1:]
+                    print("É pra ser o index real da snp2: " + str(real_index+1))
+                    pos_relativa_lista.append(str(real_index+1))
+                    request_text_middle = request_text_middle[:real_index] + j[l] + request_text_middle[real_index+1:]
                 string_dos_alelos = '|'.join(j)
                 string_nomes_snps = '|'.join(map(str, lista_comb))
                 pos_relativa = '|'.join(pos_relativa_lista)
