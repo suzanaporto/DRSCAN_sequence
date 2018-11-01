@@ -167,7 +167,7 @@ def main(args):
 						if (i==0 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50) or (i!=0 and lista_por_chrom[i].location - lista_por_chrom[i-1].location >=50 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50):
                         
 							#faz a sequência com uma snp só
-				                        print("Debug5")
+                                                        print("Debug6")
 							first_write = snp_stuff.request_sequence(lista_por_chrom[i],genome_version,first_write)
                         
 							#se a próxima iteração for a última(penultima snp) e o próximo menos o atual for maior do que 50
