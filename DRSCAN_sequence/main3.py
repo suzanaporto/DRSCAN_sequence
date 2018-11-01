@@ -58,21 +58,25 @@ def main(args):
 	genome_version = args['genome_version']
 	
 	lista_snp = args['snp_list']
-	
-	for i in lista_snp:
-		print(i.name)
-		print(i.location)
-		print(i.chrom)
 
 	'''
 	allele1 = Allele(nome='T',local=17282721,cromossomo=19,is_comum=True,snp_pos=0)
 	allele2 = Allele(nome='A',local=17282721,cromossomo=19,is_comum=False,snp_pos=0)
-	allele3 = Allele(nome='A',local=36662856,cromossomo=14,is_comum=True,snp_pos=0)
+	allele3 = Allele(nome='C',local=1728,cromossomo=16,is_comum=True,snp_pos=0)
+	allele4 = Allele(nome='T',local=1728,cromossomo=16,is_comum=False,snp_pos=0)
+	allele5 = Allele(nome='T',local=17284000,cromossomo=17,is_comum=True,snp_pos=0)
+	allele6 = Allele(nome='G',local=17284000,cromossomo=17,is_comum=False,snp_pos=0)
 
-	snp1 = Snp(name='rs8108174',location=17282721,chrom=19,charact='snv',ancestral_al=allele1,minor_al=[allele2])
-	snp2 = Snp(name='rs12883049',location=36662856,chrom=14,charact='snv',ancestral_al=allele3,minor_al=[allele4])
-	
+	snp1 = Snp(name='rs1108174',location=17282721,chrom=19,charact='snv',ancestral_al=allele1,minor_al=[allele2])
+	snp2 = Snp(name='rs2108174',location=1728,chrom=18,charact='snv',ancestral_al=allele3,minor_al=[allele4])
+	snp3 = Snp(name='rs3108174',location=17284000,chrom=17,charact='snv',ancestral_al=allele5,minor_al=[allele6])
+	lista_snp = [snp1,snp2,snp3]
 	'''
+	for i in lista_snp:
+		print("nome: ",i.name)
+		print("location: ",i.location)
+		print("chromossome: ",i.chrom)
+
 	# Perguntar se o usuário gostaria de saber se as snps estão em um elemento regulatório baseado no roadmap epigenomics
 
 	lista_snp.sort(key=lambda x: (x.chrom, x.location), reverse=False)
