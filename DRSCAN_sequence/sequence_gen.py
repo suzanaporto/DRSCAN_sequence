@@ -43,6 +43,8 @@ def gen_sequence(snp_names, info_list,genome_version):
 		#coloca a snp na lista de snps
 		snp_list_object.append(snp_insert)
 		
+		minor_allele_list = []
+		
 	for x in snp_list_object:
 		print(x.name)
 		print(str(x.location))
