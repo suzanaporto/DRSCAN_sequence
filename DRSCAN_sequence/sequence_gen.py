@@ -31,7 +31,7 @@ def gen_sequence(snp_names, info_list,genome_version):
 		
 		allele_comum_insert = Allele(nome=snp_al,local=snp_location,cromossomo=snp_chrom,is_comum=True,snp_pos=0)
 		
-		minor_allele_insert = Allele(nome=i,local=snp_location,cromossomo=snp_chrom,is_comum=False,snp_pos=0)
+		minor_allele_insert = Allele(nome=snp_al_v,local=snp_location,cromossomo=snp_chrom,is_comum=False,snp_pos=0)
 		#minor_allele_list.append(minor_allele_insert)
 		
 		#cria um objeto do tipo snp e insere as informações da snp nele
