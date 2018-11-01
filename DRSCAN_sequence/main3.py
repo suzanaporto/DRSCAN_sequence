@@ -167,12 +167,14 @@ def main(args):
 						if (i==0 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50) or (i!=0 and lista_por_chrom[i].location - lista_por_chrom[i-1].location >=50 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50):
                         
 							#faz a sequência com uma snp só
+				                        print("Debug5")
 							first_write = snp_stuff.request_sequence(lista_por_chrom[i],genome_version,first_write)
                         
 							#se a próxima iteração for a última(penultima snp) e o próximo menos o atual for maior do que 50
 							if i+1 == len(lista_por_chrom)-1 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50:
                             
 								#faz a sequência da última snp da lista de cromossomos
+				                                print("Debug5")
 								first_write = snp_stuff.request_sequence(lista_por_chrom[i+1],genome_version,first_write)
                     
 						#se tiver as condições do if
@@ -207,18 +209,22 @@ def main(args):
 									if i+1==len(lista_por_chrom)-1 and lista_por_chrom[i+1].location - lista_por_chrom[i].location >=50:
 
 										#faz a sequencia normal com o ultimo
+										print("Debug1")
 										first_write = snp_stuff.request_sequence(lista_por_chrom[i+1],genome_version,first_write)
 				#lista de cromossomos é maior do que 1
 				else:
 
 					# faz a sequencia normal com a única snp da lista
+					print("Debug3")
 					first_write =snp_stuff.request_sequence(lista_por_chrom[0],genome_version,first_write)
 					#() se o proximo for o ultimo da lista de snps, faça a sequencia normal do último(no caso de tiver só dois na lista)
 					if cont_i + 1 == tamanho_lista_snp:
+						print("Debug2")
 						first_write =snp_stuff.request_sequence(lista_snp[-1],genome_version,first_write)  
 				#deletar a lista das snps por cromossomo 
 				del lista_por_chrom[:]
 	else:
+		print("Debug4")
 		first_write =snp_stuff.request_sequence(lista_snp[0],genome_version,first_write)
 		
 	return txt_2_list(args['return_list'], filename = "sequenciasdef.fna")
