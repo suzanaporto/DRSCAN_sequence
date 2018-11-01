@@ -31,13 +31,15 @@ def gen_sequence(snp_names, info_list,genome_version):
 		
 		allele_comum_insert = Allele(nome=snp_al,local=snp_location,cromossomo=snp_chrom,is_comum=True,snp_pos=0)
 		
-		minor_allele_insert = Allele(nome=snp_al_v,local=snp_location,cromossomo=snp_chrom,is_comum=False,snp_pos=0)
-		#minor_allele_list.append(minor_allele_insert)
+		for i in snp_al_v:
+			if i == 'A' or i == 'C' or i == 'G' or i == 'T':
+				minor_allele_insert = Allele(nome=i,local=snp_location,cromossomo=snp_chrom,is_comum=False,snp_pos=0)
+				minor_allele_list.append(minor_allele_insert)
 		
 		#cria um objeto do tipo snp e insere as informações da snp nele
 		snp_insert = Snp(name=snp_name, location=snp_location, chrom=snp_chrom,
 				 charact="SNV",ancestral_al= allele_comum_insert,
-				 minor_al=minor_allele_insert)
+				 minor_al=minor_allele_list)
 	
 		#coloca a snp na lista de snps
 		snp_list_object.append(snp_insert)
@@ -54,4 +56,3 @@ def gen_sequence(snp_names, info_list,genome_version):
 	res.append(m3.main(args))
 	#print(res)
 	return res
-
