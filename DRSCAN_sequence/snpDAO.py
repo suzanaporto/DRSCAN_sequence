@@ -171,4 +171,4 @@ class SnpDAO (object):
         del lista_comb[:]
         del lista_de_alelos[:]
         del lista_de_comb_sets[:]
-	return False
+        return False
