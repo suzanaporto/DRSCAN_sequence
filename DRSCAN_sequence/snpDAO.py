@@ -100,7 +100,7 @@ class SnpDAO (object):
         f.close()
         return False
 
-    def request_sequence_combinations(self,lista_comb,genome,is_first,first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1):
+    def request_sequence_combinations(self,lista_comb,genome,is_first,filename="sequenciasdef.fna",first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1):
         g = GraphDAO()
         pos_relativa_lista = []
         #ver as snps da lista de combinacoes e coloca os seus alelos na lista de alelos com numeros para representar as suas posicoes e snps
