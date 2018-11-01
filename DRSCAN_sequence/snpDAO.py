@@ -107,7 +107,7 @@ class SnpDAO (object):
             for x in j.minor_al:
                 x.snp_pos = cont
                 lista_de_alelos.append(x)
-            cont +=1
+            cont+=1
             
         #coloca os primeiros alelos numa lista e os ultimos alelos em outra lista
         for y in lista_de_alelos:
