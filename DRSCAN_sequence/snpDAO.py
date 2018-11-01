@@ -162,7 +162,7 @@ class SnpDAO (object):
                     f = open(filename,"a")
                 f.write(">sequence_combinations|"+ string_nomes_snps + "|" + str(lista_comb[0].chrom) + "|" +string_dos_alelos+ "|" + pos_relativa + '\n')
                 f.write(request_text_middle + '\n')  #writes o/p to add.txt file
-		is_first = False
+                is_first = False
                 f.close()
                 pos_relativa_lista = []
         real_index = 0
