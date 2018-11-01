@@ -77,6 +77,8 @@ def main(args):
 		print("location: ",i.location)
 		print("chromossome: ",i.chrom)
 		print("wild_type",i.ancestral_al)
+		for m_a in i.minor_al:
+			print("variation: ",m_a)
 
 	# Perguntar se o usuário gostaria de saber se as snps estão em um elemento regulatório baseado no roadmap epigenomics
 
