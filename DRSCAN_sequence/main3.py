@@ -58,6 +58,11 @@ def main(args):
 	genome_version = args['genome_version']
 	
 	lista_snp = args['snp_list']
+	
+	for i in lista_snp:
+		print(i.nome)
+		print(i.local)
+		print(i.cromossomo)
 
 	'''
 	allele1 = Allele(nome='T',local=17282721,cromossomo=19,is_comum=True,snp_pos=0)
