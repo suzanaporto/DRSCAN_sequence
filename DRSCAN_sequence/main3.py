@@ -224,8 +224,7 @@ def main(args):
 	else:
                 print("Debug4")
                 first_write =snp_stuff.request_sequence(lista_snp[0],genome_version,first_write)
-		
-        return txt_2_list(args['return_list'], filename = "sequenciasdef.fna")
+	return txt_2_list(args['return_list'], filename = "sequenciasdef.fna")
 		
 				
 def txt_2_list(return_list, filename = "sequenciasdef.fna"):
