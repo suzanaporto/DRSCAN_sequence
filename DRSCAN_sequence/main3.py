@@ -174,7 +174,7 @@ def main(args):
                             
 								#faz a sequência da última snp da lista de cromossomos
                                                                 print("Debug5")
-								first_write = snp_stuff.request_sequence(lista_por_chrom[i+1],genome_version,first_write)
+                                                                first_write = snp_stuff.request_sequence(lista_por_chrom[i+1],genome_version,first_write)
                     
 						#se tiver as condições do if
 						else:
