@@ -146,7 +146,7 @@ def main(args):
 	#--------------------------------------------------------fazendo sequencias direto na verificacao---------------------------------------///
 
 	#faz um loop na lista toda
-        if tamanho_lista_snp >= 1:
+	if tamanho_lista_snp >= 1:
                 for cont_i in range(tamanho_lista_snp):
                         #coloca na lista de cromossomos cada iteração de i
                         lista_por_chrom.append(lista_snp[cont_i])
