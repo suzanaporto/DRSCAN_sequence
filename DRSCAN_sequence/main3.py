@@ -221,7 +221,7 @@ def main(args):
                                                 first_write =snp_stuff.request_sequence(lista_snp[-1],genome_version,first_write)  
                                 #deletar a lista das snps por cromossomo 
                                 del lista_por_chrom[:]
-        else:
+	else:
                 print("Debug4")
                 first_write =snp_stuff.request_sequence(lista_snp[0],genome_version,first_write)
 		
