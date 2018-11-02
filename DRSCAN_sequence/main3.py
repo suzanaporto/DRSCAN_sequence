@@ -152,7 +152,7 @@ def main(args):
                         lista_por_chrom.append(lista_snp[cont_i])
                         print(lista_snp[cont_i].name)
 			#verifica se o cromossomo atual é diferente do próximo, ou se a iteração atual é a última(penúltima snp) e o cromossomo atual é igual ao próximo ()
-			if (lista_snp[cont_i].chrom != lista_snp[cont_i+1].chrom) or (cont_i+1==tamanho_lista_snp and lista_snp[cont_i].chrom == lista_snp[cont_i+1].chrom) :
+                        if (lista_snp[cont_i].chrom != lista_snp[cont_i+1].chrom) or (cont_i+1==tamanho_lista_snp and lista_snp[cont_i].chrom == lista_snp[cont_i+1].chrom) :
 				#essa foi a mudança que eu coloquei pra poder colocar o último da lista
 				if cont_i+1==tamanho_lista_snp and lista_snp[cont_i].chrom == lista_snp[cont_i+1].chrom:
 					lista_por_chrom.append(lista_snp[cont_i+1])
