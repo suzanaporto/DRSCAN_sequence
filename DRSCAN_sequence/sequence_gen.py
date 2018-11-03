@@ -56,7 +56,7 @@ def gen_sequence(snp_names, info_list,genome_version):
 	for x in snp_list_object:
 		print(x.name)
 		print(str(x.location))
-		for i in minor_al:
+		for i in x.minor_al:
 			print(i.nome)
 	
 	args = {"snp_list":snp_list_object,
