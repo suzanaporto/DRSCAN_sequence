@@ -29,7 +29,7 @@ def gen_sequence(snp_names, info_list,genome_version):
 		
 		if (len(i) > 1):
 			for dic in i:
-            	list_minor.append(dic['allele_v'])
+				list_minor.append(dic['allele_v'])
 	
 		#s_minor = '|'.join(list_minor)
 		
