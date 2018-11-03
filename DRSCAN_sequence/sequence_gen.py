@@ -24,16 +24,26 @@ def gen_sequence(snp_names, info_list,genome_version):
 		snp_location = int(i[index]['location'])
 		snp_chrom = int(i[index]['chrom'])
 		snp_al = i[index]['allele_wt']
-		snp_al_v = i[index]['allele_v']
+		
+		list_minor = []
+		
+		if (len(i) > 1):
+			for dic in i:
+            	list_minor.append(dic['allele_v'])
+	
+		#s_minor = '|'.join(list_minor)
+		
+		#minor_allele_string
+		#snp_al_v = i[index]['allele_v']
 
 		print("index",index)
 		print("Allele variation:",snp_al_v)
 		
 		allele_comum_insert = Allele(nome=snp_al,local=snp_location,cromossomo=snp_chrom,is_comum=True,snp_pos=0)
 		
-
-		minor_allele_insert = Allele(nome=snp_al_v,local=snp_location,cromossomo=snp_chrom,is_comum=False,snp_pos=0)
-		minor_allele_list.append(minor_allele_insert)
+		for m_allele in list_minor:
+			minor_allele_insert = Allele(nome=m_allele,local=snp_location,cromossomo=snp_chrom,is_comum=False,snp_pos=0)
+			minor_allele_list.append(minor_allele_insert)
 		
 		#cria um objeto do tipo snp e insere as informações da snp nele
 		snp_insert = Snp(name=snp_name, location=snp_location, chrom=snp_chrom,
@@ -44,10 +54,13 @@ def gen_sequence(snp_names, info_list,genome_version):
 		snp_list_object.append(snp_insert)
 		
 		minor_allele_list = []
+		list_minor = []
 		
 	for x in snp_list_object:
 		print(x.name)
 		print(str(x.location))
+		for i in minor_al:
+			print(i.nome)
 	
 	args = {"snp_list":snp_list_object,
 		"return_list":True,
