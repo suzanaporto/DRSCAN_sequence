@@ -27,16 +27,12 @@ def gen_sequence(snp_names, info_list,genome_version):
 		
 		list_minor = []
 		
+		#check if there is more than one minor allele
 		if (len(i) > 1):
 			for dic in i:
 				list_minor.append(dic['allele_v'])
 		else:
 			list_minor.append(i[index]['allele_v'])
-
-		#s_minor = '|'.join(list_minor)
-		
-		#minor_allele_string
-		#snp_al_v = i[index]['allele_v']
 		
 		allele_comum_insert = Allele(nome=snp_al,local=snp_location,cromossomo=snp_chrom,is_comum=True,snp_pos=0)
 		
@@ -54,12 +50,6 @@ def gen_sequence(snp_names, info_list,genome_version):
 		
 		minor_allele_list = []
 		list_minor = []
-		
-	for x in snp_list_object:
-		print(x.name)
-		print(str(x.location))
-		for i in x.minor_al:
-			print(i.nome)
 	
 	args = {"snp_list":snp_list_object,
 		"return_list":True,
