@@ -35,9 +35,6 @@ def gen_sequence(snp_names, info_list,genome_version):
 		
 		#minor_allele_string
 		#snp_al_v = i[index]['allele_v']
-
-		print("index",index)
-		print("Allele variation:",snp_al_v)
 		
 		allele_comum_insert = Allele(nome=snp_al,local=snp_location,cromossomo=snp_chrom,is_comum=True,snp_pos=0)
 		
