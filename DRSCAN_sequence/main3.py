@@ -72,11 +72,11 @@ def main(args):
 	#allele7 = Allele(nome='T',local=6704583,cromossomo=1,is_comum=False,snp_pos=0)
 
 	#snp1 = Snp(name='rs278020',location=6704583,chrom=1,charact='snv',ancestral_al=allele1,
-				minor_al=[allele2,allele7])
+				#minor_al=[allele2,allele7])
 	#snp2 = Snp(name='rs278021',location=6704603,chrom=1,charact='snv',ancestral_al=allele3,
-				minor_al=[allele4])
+				#minor_al=[allele4])
 	#snp3 = Snp(name='rs123121',location=135536917,chrom=5,charact='snv',ancestral_al=allele5,
-				minor_al=[allele6])
+				#minor_al=[allele6])
 	
 	#lista_snp = [snp1,snp2,snp3]
 
