@@ -63,24 +63,27 @@ def main(args):
 	lista_snp = args['snp_list']
 
 	
-	#allele1 = Allele(nome='C',local=6704583,cromossomo=1,is_comum=True,snp_pos=0)
-	#allele2 = Allele(nome='A',local=6704583,cromossomo=1,is_comum=False,snp_pos=0)
-	#allele3 = Allele(nome='T',local=6704603,cromossomo=1,is_comum=True,snp_pos=0)
-	#allele4 = Allele(nome='C',local=6704603,cromossomo=1,is_comum=False,snp_pos=0)
-	#allele5 = Allele(nome='T',local=135536917,cromossomo=5,is_comum=True,snp_pos=0)
-	#allele6 = Allele(nome='C',local=135536917,cromossomo=5,is_comum=False,snp_pos=0)
-	#allele7 = Allele(nome='T',local=6704583,cromossomo=1,is_comum=False,snp_pos=0)
+	allele1 = Allele(nome='C',local=6704583,cromossomo=1,is_comum=True,snp_pos=0)
+	allele2 = Allele(nome='A',local=6704583,cromossomo=1,is_comum=False,snp_pos=0)
+	allele7 = Allele(nome='T',local=6704583,cromossomo=1,is_comum=False,snp_pos=0)
+	allele3 = Allele(nome='T',local=6704603,cromossomo=1,is_comum=True,snp_pos=0)
+	allele4 = Allele(nome='C',local=6704603,cromossomo=1,is_comum=False,snp_pos=0)
+	allele5 = Allele(nome='T',local=135536917,cromossomo=5,is_comum=True,snp_pos=0)
+	allele6 = Allele(nome='C',local=135536917,cromossomo=5,is_comum=False,snp_pos=0)
+	allele8 = Allele(nome='G',local=85215584,cromossomo=1,is_comum=True,snp_pos=0)
+	allele9 = Allele(nome='A',local=85215584,cromossomo=1,is_comum=False,snp_pos=0)
+	allele10 = Allele(nome='C',local=85215584,cromossomo=1,is_comum=False,snp_pos=0)
 
-	#snp1 = Snp(name='rs278020',location=6704583,chrom=1,charact='snv',ancestral_al=allele1,
-				#minor_al=[allele2,allele7])
-	#snp2 = Snp(name='rs278021',location=6704603,chrom=1,charact='snv',ancestral_al=allele3,
-				#minor_al=[allele4])
-	#snp3 = Snp(name='rs123121',location=135536917,chrom=5,charact='snv',ancestral_al=allele5,
-				#minor_al=[allele6])
+	snp1 = Snp(name='rs278020',location=6704583,chrom=1,charact='snv',ancestral_al=allele1,
+				minor_al=[allele2,allele7])
+	snp2 = Snp(name='rs278021',location=6704603,chrom=1,charact='snv',ancestral_al=allele3,
+				minor_al=[allele4])
+	snp3 = Snp(name='rs123121',location=135536917,chrom=5,charact='snv',ancestral_al=allele5,
+				minor_al=[allele6])
+	snp4 = Snp(name='rs12117219',location=85215584,chrom=1,charact='snv',ancestral_al=allele8,
+				minor_al=[allele9,allele10])
 	
-	#lista_snp = [snp1,snp2,snp3]
-	
-	print(lista_snp)
+	lista_snp = [snp1,snp2,snp3,snp4]
 
 	#---------------------sort list by local and chromossome-------------------------///
 
@@ -174,11 +177,15 @@ def main(args):
 										ancestral_al=chrom_df.iloc[i+1]['Allele Wild Type'],
 										minor_al=chrom_df.iloc[i+1]['Allele Variation'])
 							first_write = snp_stuff.request_sequence(snp,genome_version,first_write)
+							if (len(lista_comb) > 1 ):
+								first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
+                    			#delete combinations list
+								del lista_comb[:]
 				#if its not in combinations list make sequence
 				else:
 					#if there is more than one in combinations list make sequence
 					if (len(lista_comb) > 1 ):
-						print("DEBUG MAKE COMBINATIONS LIST")
+						print("------DEBUG------")
 						first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
                     	#delete combinations list
 						del lista_comb[:]
