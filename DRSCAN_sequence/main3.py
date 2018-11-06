@@ -79,6 +79,8 @@ def main(args):
 				#minor_al=[allele6])
 	
 	#lista_snp = [snp1,snp2,snp3]
+	
+	print(lista_snp)
 
 	#---------------------sort list by local and chromossome-------------------------///
 
