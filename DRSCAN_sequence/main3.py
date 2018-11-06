@@ -178,6 +178,7 @@ def main(args):
 				else:
 					#if there is more than one in combinations list make sequence
 					if (len(lista_comb) > 1 ):
+						print("DEBUG MAKE COMBINATIONS LIST")
 						first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
                     	#delete combinations list
 						del lista_comb[:]
