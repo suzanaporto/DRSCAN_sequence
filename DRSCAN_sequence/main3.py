@@ -140,7 +140,7 @@ def main(args):
 			for i in range(len(chrom_df)-1):
 				next_smaller = chrom_df.iloc[i + 1]['Difference'] <50
 				bigger = chrom_df.iloc[i]['Difference'] >=50
-				current_0 = chrom_df.iloc[i+1]['Difference'] == 0
+				current_0 = chrom_df.iloc[i]['Difference'] == 0
 				smaller = chrom_df.iloc[i]['Difference'] <50
 				#check if it needs to be in list of combinations
 				if ( (bigger and next_smaller) or (smaller and not(current_0)) or (current_0 and next_smaller) ):
