@@ -9,6 +9,7 @@
 #
 #
 import requests, sys
+from snp import Snp
 from graphDAO import GraphDAO
 
 class SnpDAO (object):
@@ -30,49 +31,18 @@ class SnpDAO (object):
           sys.exit()
 
         return r1.text
-    #sem uso no programa atualmente
-    def request_sequence_head(self, list_size, head_location,snp_chrom):
-        #declara o servidor
-        server = "http://rest.ensembl.org"
-
-        #declara as variáveis para montar as urls para fazer o request
-        right_left_size = int(list_size/2)
-        x = head_location - list_size
-        y = middle_location + list_size
-        ext = "/sequence/region/human/" + str(snp_chrom) +":"+ str(x) + ".."+ str(y) + ":1?"
-
-        r1 = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
-
-        if not r1.ok:
-          r1.raise_for_status()
-          sys.exit()
-
-        return r1.text
-    #sem uso no programa
-    def request_sequence_tail(self, list_size, tail_location,snp_chrom):
-        #declara o servidor
-        server = "http://rest.ensembl.org"
-
-        #declara as variáveis para montar as urls para fazer o request
-        right_left_size = int(list_size/2)
-        x = tail_location - list_size
-        y = middle_location + list_size
-        ext = "/sequence/region/human/" + str(snp_chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version
-
-        r1 = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
-
-        if not r1.ok:
-          r1.raise_for_status()
-          sys.exit()
-
-        return r1.text      
 
     def request_sequence(self,snp,genome_version,is_first,filename="sequenciasdef.fna"):
         #declara o servidor
         server = "http://rest.ensembl.org"
         x = snp.location - 50
         y = snp.location + 50
-        ext = "/sequence/region/human/" + str(snp.chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version
+        chrom_req = snp.chrom
+        if snp.chrom == 23:
+            chrom_req = "X"
+        elif snp.chrom == 24:
+            chrom_req = "Y"
+        ext = "/sequence/region/human/" + str(chrom_req) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version
         r1 = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
         if not r1.ok:
             r1.raise_for_status()
@@ -82,25 +52,28 @@ class SnpDAO (object):
         tamanho_seq = 50*2 + 1
         seq_meio = r1.text
         seq_meio = seq_meio[:50] + snp.ancestral_al.nome + seq_meio[51:]
-        print (">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one))
+        print (">sequence_wild_type|"+str(snp.name) +"|"+str(chrom_req)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one))
         print (seq_meio)
         if is_first:
             f = open(filename,"w")   #create add file in write mode
         else:
             f = open(filename,"a")
-        line_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(snp.chrom)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one) + '\n'
+        line_seq = ">sequence_wild_type|"+str(snp.name) +"|"+str(chrom_req)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one) + '\n'
         f.write(line_seq)
         f.write(seq_meio + '\n')  #writes o/p to add.txt file
         for j in snp.minor_al:
             seq_meio_alt = seq_meio[:50] + j.nome + seq_meio[51:]
-            print (">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one))
+            print (">sequence_variation|"+str(snp.name) +"|"+str(chrom_req)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one))
             print (seq_meio_alt)
-            f.write(">sequence_variation|"+str(snp.name) +"|"+str(snp.chrom)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one)+ '\n')
+            f.write(">sequence_variation|"+str(snp.name) +"|"+str(chrom_req)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one)+ '\n')
             f.write(seq_meio_alt + '\n')  #writes o/p to add.txt file
         f.close()
         return False
 
-    def request_sequence_combinations(self,lista_comb,genome,is_first,filename="sequenciasdef.fna",first_alleles=[],last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],cont=1):
+    def request_sequence_combinations(self,lista_comb,genome,
+                                    is_first,filename="sequenciasdef.fna",first_alleles=[],
+                                    last_alleles=[],lista_de_alelos=[],lista_de_comb_sets=[],
+                                    cont=1):
         g = GraphDAO()
         pos_relativa_lista = []
         #ver as snps da lista de combinacoes e coloca os seus alelos na lista de alelos com numeros para representar as suas posicoes e snps
@@ -146,10 +119,8 @@ class SnpDAO (object):
                     else:
                         #calculo do index real
                         real_index = real_index + lista_comb[l].location - lista_comb[l-1].location
-                    print("É pra ser o index real da snp2: " + str(real_index+1))
                     pos_relativa_lista.append(str(real_index+1))
                     request_text_middle = request_text_middle[:real_index] + j[l] + request_text_middle[real_index+1:]
-                print("combinacoes: ",j)
                 string_dos_alelos = '|'.join(j)
                 string_nomes_snps = '|'.join(map(str, lista_comb))
                 pos_relativa = '|'.join(pos_relativa_lista)
