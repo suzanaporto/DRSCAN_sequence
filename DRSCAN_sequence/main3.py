@@ -139,9 +139,10 @@ def main(args):
 			first_write = snp_stuff.request_sequence(snp,genome_version,first_write)
 		#check if there is more than one element
 		elif (size > 0):
-			#iterate chrmossome list
+			#iterate chromossome list
 			for i in range(len(chrom_df)-1):
 				next_smaller = chrom_df.iloc[i + 1]['Difference'] <50
+				next_bigger = chrom_df.iloc[i + 1]['Difference'] >50
 				bigger = chrom_df.iloc[i]['Difference'] >=50
 				current_0 = chrom_df.iloc[i]['Difference'] == 0
 				smaller = chrom_df.iloc[i]['Difference'] <50
@@ -181,11 +182,17 @@ def main(args):
 								first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
                     			#delete combinations list
 								del lista_comb[:]
+				if (smaller and next_bigger):
+					if (len(lista_comb) > 1 ):
+						print("------DEBUG1------")
+						first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
+                    	#delete combinations list
+						del lista_comb[:]
 				#if its not in combinations list make sequence
 				else:
 					#if there is more than one in combinations list make sequence
 					if (len(lista_comb) > 1 ):
-						print("------DEBUG------")
+						print("------DEBUG2------")
 						first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
                     	#delete combinations list
 						del lista_comb[:]
