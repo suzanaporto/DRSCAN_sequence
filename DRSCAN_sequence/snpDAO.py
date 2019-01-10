@@ -22,11 +22,11 @@ class SnpDAO (object):
         #declara as variáveis para montar as urls para fazer o request
         x = start_location - 50
         y = end_location + 50
-	#change snp_chrom
-	if str(snp_chrom) == '23':
-		snp_chrom = 'X'
-	if str(snp_chrom) == '24':
-		snp_chrom = 'Y'
+        #change snp_chrom
+        if str(snp_chrom) == '23':
+            snp_chrom = 'X'
+        if str(snp_chrom) == '24':
+            snp_chrom = 'Y'
         ext = "/sequence/region/human/" + str(snp_chrom) +":"+ str(x) + ".."+ str(y) + ":1?coord_system_version=" + genome_version
 
         r1 = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
