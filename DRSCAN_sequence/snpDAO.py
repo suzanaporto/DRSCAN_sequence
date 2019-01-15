@@ -125,9 +125,9 @@ class SnpDAO (object):
                         #calculo do index real
                         real_index = real_index + lista_comb[l].location - lista_comb[l-1].location
                         print("Element l:",lista_comb[l])
-			print("Element l location:",str(lista_comb[l].location))
-			print("Element l -1:",lista_comb[l -1])
-			print("Element l -1 Location:",str(lista_comb[l-1].location))
+                        print("Element l location:",str(lista_comb[l].location))
+                        print("Element l -1:",lista_comb[l -1])
+                        print("Element l -1 Location:",str(lista_comb[l-1].location))
                     pos_relativa_lista.append(str(real_index+1))
                     print("Real index: ",str(real_index))
                     request_text_middle = request_text_middle[:real_index] + j[l] + request_text_middle[real_index+1:]
