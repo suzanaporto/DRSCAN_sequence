@@ -142,13 +142,18 @@ def main(args):
 			#iterate chromossome list
 			for i in range(len(chrom_df)-1):
 				next_smaller = chrom_df.iloc[i + 1]['Difference'] <32
-				next_bigger = chrom_df.iloc[i + 1]['Difference'] >32
 				bigger = chrom_df.iloc[i]['Difference'] >=32
 				current_0 = chrom_df.iloc[i]['Difference'] == 0
 				smaller = chrom_df.iloc[i]['Difference'] <32
-				##new logic
-				#check if it needs to be in list of combinations/ always checking the next_smaller ones
-				if (next_smaller):
+				#check if it needs to be in list of combinations
+				if ( (bigger and next_smaller) or (smaller and not(current_0)) or (current_0 and next_smaller) ):
+					#TODO see if it works. Added now
+					if (len(lista_comb) > 1 ):
+						if (bigger and next_smaller):
+							first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
+                    		#delete combinations list
+							del lista_comb[:]
+					
 					snp = Snp(	name=chrom_df.iloc[i]['Name'],
 								location=chrom_df.iloc[i]['Location'],
 								chrom=chrom_df.iloc[i]['Chromossome'],
@@ -157,46 +162,111 @@ def main(args):
 								minor_al=chrom_df.iloc[i]['Allele Variation'])
 					lista_comb.append(snp)
 					#if its last iteration
-					if (i == size-1):
-						snp = Snp(	name=chrom_df.iloc[i + 1]['Name'],
-									location=chrom_df.iloc[i + 1]['Location'],
-									chrom=chrom_df.iloc[i + 1]['Chromossome'],
-									charact=chrom_df.iloc[i + 1]['Characteristic'],
-									ancestral_al=chrom_df.iloc[i + 1]['Allele Wild Type'],
-									minor_al=chrom_df.iloc[i + 1]['Allele Variation'])
-						lista_comb.append(snp)
-						first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
-						del lista_comb[:]
-				#if next one is not smaller
-				else:
-					if (smaller and not(current_0)):
-						snp = Snp(	name=chrom_df.iloc[i]['Name'],
-								location=chrom_df.iloc[i]['Location'],
-								chrom=chrom_df.iloc[i]['Chromossome'],
-								charact=chrom_df.iloc[i]['Characteristic'],
-								ancestral_al=chrom_df.iloc[i]['Allele Wild Type'],
-								minor_al=chrom_df.iloc[i]['Allele Variation'])
-						lista_comb.append(snp)
-						first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
-						del lista_comb[:]
-						if (i == size-1):
-							snp = Snp(	name=chrom_df.iloc[i + 1]['Name'],
-								location=chrom_df.iloc[i + 1]['Location'],
-								chrom=chrom_df.iloc[i + 1]['Chromossome'],
-								charact=chrom_df.iloc[i + 1]['Characteristic'],
-								ancestral_al=chrom_df.iloc[i + 1]['Allele Wild Type'],
-								minor_al=chrom_df.iloc[i + 1]['Allele Variation'])
+					if i == size-1:
+						if (next_smaller):
+							snp = Snp(	name=chrom_df.iloc[i+1]['Name'],
+										location=chrom_df.iloc[i+1]['Location'],
+										chrom=chrom_df.iloc[i+1]['Chromossome'],
+										charact=chrom_df.iloc[i+1]['Characteristic'],
+										ancestral_al=chrom_df.iloc[i+1]['Allele Wild Type'],
+										minor_al=chrom_df.iloc[i+1]['Allele Variation'])
+							lista_comb.append(snp)
+							first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
+							#delete combinations list
+							del lista_comb[:]
+						#last iteration is not in combinations list
+						else:
+							snp = Snp(	name=chrom_df.iloc[i+1]['Name'],
+										location=chrom_df.iloc[i+1]['Location'],
+										chrom=chrom_df.iloc[i+1]['Chromossome'],
+										charact=chrom_df.iloc[i+1]['Characteristic'],
+										ancestral_al=chrom_df.iloc[i+1]['Allele Wild Type'],
+										minor_al=chrom_df.iloc[i+1]['Allele Variation'])
+							print("176 name: " + chrom_df.iloc[i+1]['Name'])
 							first_write = snp_stuff.request_sequence(snp,genome_version,first_write)
-					else:
-						snp = Snp(	name=chrom_df.iloc[i]['Name'],
-								location=chrom_df.iloc[i]['Location'],
+							if (len(lista_comb) > 1 ):
+								first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
+                    			#delete combinations list
+								del lista_comb[:]
+				#if its not in combinations list make sequence
+				else:
+					#if there is more than one in combinations list make sequence
+					if (len(lista_comb) > 1 ):
+						print("------DEBUG------")
+						first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
+                    	#delete combinations list
+						del lista_comb[:]
+					snp = Snp(	name=chrom_df.iloc[i]['Name'],
+								location= chrom_df.iloc[i]['Location'],
 								chrom=chrom_df.iloc[i]['Chromossome'],
 								charact=chrom_df.iloc[i]['Characteristic'],
 								ancestral_al=chrom_df.iloc[i]['Allele Wild Type'],
 								minor_al=chrom_df.iloc[i]['Allele Variation'])
+					print("196 name: " + chrom_df.iloc[i]['Name'])
+					first_write = snp_stuff.request_sequence(snp,genome_version,first_write)
+					if i == size-1:
+						snp = Snp(	name=chrom_df.iloc[i+1]['Name'],
+									location= chrom_df.iloc[i+1]['Location'],
+									chrom=chrom_df.iloc[i+1]['Chromossome'],
+									charact=chrom_df.iloc[i+1]['Characteristic'],
+									ancestral_al=chrom_df.iloc[i+1]['Allele Wild Type'],
+									minor_al=chrom_df.iloc[i+1]['Allele Variation'])
+						print("205 name: " + chrom_df.iloc[i+1]['Name'])
 						first_write = snp_stuff.request_sequence(snp,genome_version,first_write)
-
-
+				# next_smaller = chrom_df.iloc[i + 1]['Difference'] <32
+				# next_bigger = chrom_df.iloc[i + 1]['Difference'] >32
+				# bigger = chrom_df.iloc[i]['Difference'] >=32
+				# current_0 = chrom_df.iloc[i]['Difference'] == 0
+				# smaller = chrom_df.iloc[i]['Difference'] <32
+				# ##new logic
+				# #check if it needs to be in list of combinations/ always checking the next_smaller ones
+				# if (next_smaller):
+				# 	snp = Snp(	name=chrom_df.iloc[i]['Name'],
+				# 				location=chrom_df.iloc[i]['Location'],
+				# 				chrom=chrom_df.iloc[i]['Chromossome'],
+				# 				charact=chrom_df.iloc[i]['Characteristic'],
+				# 				ancestral_al=chrom_df.iloc[i]['Allele Wild Type'],
+				# 				minor_al=chrom_df.iloc[i]['Allele Variation'])
+				# 	lista_comb.append(snp)
+				# 	#if its last iteration
+				# 	if (i == size-1):
+				# 		snp = Snp(	name=chrom_df.iloc[i + 1]['Name'],
+				# 					location=chrom_df.iloc[i + 1]['Location'],
+				# 					chrom=chrom_df.iloc[i + 1]['Chromossome'],
+				# 					charact=chrom_df.iloc[i + 1]['Characteristic'],
+				# 					ancestral_al=chrom_df.iloc[i + 1]['Allele Wild Type'],
+				# 					minor_al=chrom_df.iloc[i + 1]['Allele Variation'])
+				# 		lista_comb.append(snp)
+				# 		first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
+				# 		del lista_comb[:]
+				# #if next one is not smaller
+				# else:
+				# 	if (smaller and not(current_0)):
+				# 		snp = Snp(	name=chrom_df.iloc[i]['Name'],
+				# 				location=chrom_df.iloc[i]['Location'],
+				# 				chrom=chrom_df.iloc[i]['Chromossome'],
+				# 				charact=chrom_df.iloc[i]['Characteristic'],
+				# 				ancestral_al=chrom_df.iloc[i]['Allele Wild Type'],
+				# 				minor_al=chrom_df.iloc[i]['Allele Variation'])
+				# 		lista_comb.append(snp)
+				# 		first_write = snp_stuff.request_sequence_combinations(lista_comb,genome_version,first_write)
+				# 		del lista_comb[:]
+				# 		if (i == size-1):
+				# 			snp = Snp(	name=chrom_df.iloc[i + 1]['Name'],
+				# 				location=chrom_df.iloc[i + 1]['Location'],
+				# 				chrom=chrom_df.iloc[i + 1]['Chromossome'],
+				# 				charact=chrom_df.iloc[i + 1]['Characteristic'],
+				# 				ancestral_al=chrom_df.iloc[i + 1]['Allele Wild Type'],
+				# 				minor_al=chrom_df.iloc[i + 1]['Allele Variation'])
+				# 			first_write = snp_stuff.request_sequence(snp,genome_version,first_write)
+				# 	else:
+				# 		snp = Snp(	name=chrom_df.iloc[i]['Name'],
+				# 				location=chrom_df.iloc[i]['Location'],
+				# 				chrom=chrom_df.iloc[i]['Chromossome'],
+				# 				charact=chrom_df.iloc[i]['Characteristic'],
+				# 				ancestral_al=chrom_df.iloc[i]['Allele Wild Type'],
+				# 				minor_al=chrom_df.iloc[i]['Allele Variation'])
+				# 		first_write = snp_stuff.request_sequence(snp,genome_version,first_write)
 
 				##old logic
 				#check if it needs to be in list of combinations
