@@ -20,8 +20,8 @@ class SnpDAO (object):
         server = "http://rest.ensembl.org"
 
         #declara as variáveis para montar as urls para fazer o request
-        x = start_location - 32
-        y = end_location + 32
+        x = start_location - 31
+        y = end_location + 31
         #change snp_chrom
         if str(snp_chrom) == '23':
             snp_chrom = 'X'
@@ -40,8 +40,8 @@ class SnpDAO (object):
     def request_sequence(self,snp,genome_version,is_first,filename="sequenciasdef.fna"):
         #declara o servidor
         server = "http://rest.ensembl.org"
-        x = snp.location - 32
-        y = snp.location + 32
+        x = snp.location - 31
+        y = snp.location + 31
         chrom_req = snp.chrom
         if snp.chrom == 23:
             chrom_req = "X"
@@ -54,9 +54,9 @@ class SnpDAO (object):
             sys.exit()
 		# Coloca as sequencias de snp no meio na variavel declarada
         starting_at_one = 1
-        tamanho_seq = 32*2 + 1
+        tamanho_seq = 31*2 + 1
         seq_meio = r1.text
-        seq_meio = seq_meio[:32] + snp.ancestral_al.nome + seq_meio[33:]
+        seq_meio = seq_meio[:31] + snp.ancestral_al.nome + seq_meio[32:]
         print (">sequence_wild_type|"+str(snp.name) +"|"+str(chrom_req)+"|"+str(snp.ancestral_al)+"|"+str((snp.location-x)+starting_at_one))
         print (seq_meio)
         if is_first:
@@ -67,7 +67,7 @@ class SnpDAO (object):
         f.write(line_seq)
         f.write(seq_meio + '\n')  #writes o/p to add.txt file
         for j in snp.minor_al:
-            seq_meio_alt = seq_meio[:32] + j.nome + seq_meio[33:]
+            seq_meio_alt = seq_meio[:31] + j.nome + seq_meio[32:]
             print (">sequence_variation|"+str(snp.name) +"|"+str(chrom_req)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one))
             print (seq_meio_alt)
             f.write(">sequence_variation|"+str(snp.name) +"|"+str(chrom_req)+"|"+j.nome+"|"+str((snp.location-x)+starting_at_one)+ '\n')
@@ -120,7 +120,7 @@ class SnpDAO (object):
                 for l in range(len(j)):
                     if (l == 0):
                         #index do primeiro elemento
-                        real_index = 32
+                        real_index = 31
                     else:
                         #calculo do index real
                         real_index = real_index + lista_comb[l].location - lista_comb[l-1].location

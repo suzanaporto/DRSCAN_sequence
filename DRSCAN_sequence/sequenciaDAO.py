@@ -52,7 +52,7 @@ class SequenciaDAO(object):
                     print (i)
                     print(j[i])
                     if (i == 0):
-                        real_index = 32
+                        real_index = 31
                     else:
                         real_index = real_index + lista_comb[i].location - lista_comb[i-1].location
                     print (real_index)

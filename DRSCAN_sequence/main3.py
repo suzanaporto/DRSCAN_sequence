@@ -141,10 +141,10 @@ def main(args):
 		elif (size > 0):
 			#iterate chromossome list
 			for i in range(len(chrom_df)-1):
-				next_smaller = chrom_df.iloc[i + 1]['Difference'] <32
-				bigger = chrom_df.iloc[i]['Difference'] >=32
+				next_smaller = chrom_df.iloc[i + 1]['Difference'] <31
+				bigger = chrom_df.iloc[i]['Difference'] >=31
 				current_0 = chrom_df.iloc[i]['Difference'] == 0
-				smaller = chrom_df.iloc[i]['Difference'] <32
+				smaller = chrom_df.iloc[i]['Difference'] <31
 				#check if it needs to be in list of combinations
 				if ( (bigger and next_smaller) or (smaller and not(current_0)) or (current_0 and next_smaller) ):
 					#TODO see if it works. Added now
